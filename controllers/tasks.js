@@ -1,15 +1,23 @@
+const Task = require("../models/task");
+
+// Controllers
 // app.get('/api/v1/tasks) - GET all the tasks
 // app.post('/api/v1/tasks) - POST a new task
 // app.get('/api/v1/tasks/:id') - GET a single task by ID
-// app.patch('/api/v1/tasks/:id') - PATCH (edit) a task by ID
+// app.patch('/api/v1/tasks/:id')  - PATCH (edit) a task by ID
 // app.delete('/api/v1/tasks/:id') - DELETE a task by ID
 
 const getAllTasks = (req, res) => {
   res.send("All items from the file");
 };
 
-const createTask = (req, res) => {
-  res.json(req.body);
+const createTask = async (req, res) => {
+  try {
+    const task = await Task.create(req.body);
+    res.status(201).json({ task });
+  } catch (err) {
+    res.status(500).json({ msg: err });
+  }
 };
 
 const getTask = (req, res) => {
