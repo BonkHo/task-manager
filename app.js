@@ -8,10 +8,11 @@ require("dotenv").config();
 
 // Middleware
 app.use(express.json());
+app.use(express.static("./public"));
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Hello World");
+	res.send("Hello World");
 });
 
 app.use("/api/v1/tasks", tasks);
@@ -20,14 +21,14 @@ app.use("/api/v1/tasks", tasks);
 PORT = 3000;
 
 const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URI);
-    app.listen(PORT, () => {
-      console.log(`Server is listnening at: http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+	try {
+		await connectDB(process.env.MONGO_URI);
+		app.listen(PORT, () => {
+			console.log(`Server is listnening at: http://localhost:${PORT}`);
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 start();
