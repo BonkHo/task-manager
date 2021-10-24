@@ -11,10 +11,6 @@ app.use(express.json());
 app.use(express.static("./public"));
 
 // Routes
-app.get("/", (req, res) => {
-	res.send("Hello World");
-});
-
 app.use("/api/v1/tasks", tasks);
 
 // Server port
